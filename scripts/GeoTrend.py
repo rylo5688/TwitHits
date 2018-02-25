@@ -48,8 +48,10 @@ def searchTweets(trends, latitude, longitude, radius):
         tweets = {}
         count = 1
         for tweet in results:
+            # print tweet._json
             tweets['tweet' + str(count)] = {}
             tweets['tweet' + str(count)]['username'] = tweet._json['user']['screen_name']
+            tweets['tweet' + str(count)]['timestamp'] = tweet._json['created_at']
             tweets['tweet' + str(count)]['tweet'] = tweet._json['text']
             tweets['tweet' + str(count)]['hashtags'] = tweet._json['entities']['hashtags']
             count = count + 1
