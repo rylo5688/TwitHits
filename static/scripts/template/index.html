@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<title>TwitHits</title>
+
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="mainPage.css">
+
+		<!-- Latest compiled and minified Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+			<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    	<script type="text/javascript" src="access.js"></script>
+    	<script type="text/javascript" src="scripts/mapScript.js"></script>
+			<script type="text/javascript" src="scripts/functions.js"></script>
+			<!-- <script type="text/javascript" src="script/functions.js"></script> -->
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+
+			<div class="row" id="top">
+				<div class="col-md-4" id="intro">
+					<h1 class="display-3">TwitHits</h1>
+				</div>
+
+				<div class="col-md-8"></div>
+			</div>
+
+			<div class="row" id="filter">
+				<!-- Search -->
+				<div class="col-sm-4" id="searchbar">
+					<form class="form-inline" role="search">
+					<input type="text" placeholder="Enter keywords separated by a comma", size="35",class="form-control">
+					<button type="submit" class="btn btn-secondary">Search</button>
+					</form>
+				</div>
+
+				<div class="col-sm-2" id="genButton">
+					<button type="button" class="btn btn-primary" onclick="genMap()">Generate TrendMap</button>
+				</div>
+
+				<div class="col-sm-2" id="resetButton">
+					<button type="button" class="btn btn-primary" onclick="resetMap()">Reset Map</button>
+				</div>
+
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row" id="trendmap">
+				<div class="col-xl-8" id="trendmap">
+					<h2>A world of trends</h2>
+					<div class="embed-responsive embed-responsive-21by9" id="map" >
+					    <script type="text/javascript" src="scripts/mapScript.js"></script>
+					</div>
+				</div>
+
+				<div class="col-lg-4" id="trendtable">
+					<h3>Twitter Trends</h3>
+					<p></p>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Bootstrap references -->
+		<!-- jQuery library -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<!-- Popper -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<!-- Latest compiled and minified Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+		<script>postData(100, 100);</script>
+	</body>
+
+</html>
