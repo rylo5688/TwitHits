@@ -1,6 +1,7 @@
 from access import Access
 import tweepy
 import json
+from textblob import TextBlob
 
 auth = tweepy.OAuthHandler(Access.consumer_key, Access.consumer_secret)
 auth.set_access_token(Access.access_token, Access.access_token_secret)
@@ -32,7 +33,7 @@ def nearbyTrends(latitude, longitude):
         trends.append(hexParse(str(tweet['query'])))
         count = count+1
 
-    searchTweets(trends, latitude, longitude, 10)
+    # searchTweets(trends, latitude, longitude, 10)
 
     json_string = json.dumps(trends)
     return json.loads(json_string)
@@ -43,17 +44,17 @@ def searchTweets(trends, latitude, longitude, radius):
 
     queryAndTweet = {}
     for query in trends:
-        results = api.search(q=query, lang="en", count=1, result_type="recent", geocode=gCode)
-
+        results = api.search(q=query, lang="en", count=1, result_type="recent", geocode=gCode, tweet_mode="extended")
+        # print results
         tweets = {}
         count = 1
         for tweet in results:
-            # print tweet._json
             tweets['tweet' + str(count)] = {}
             tweets['tweet' + str(count)]['username'] = tweet._json['user']['screen_name']
             tweets['tweet' + str(count)]['timestamp'] = tweet._json['created_at']
-            tweets['tweet' + str(count)]['tweet'] = tweet._json['text']
+            tweets['tweet' + str(count)]['tweet'] = tweet._json['full_text']
             tweets['tweet' + str(count)]['hashtags'] = tweet._json['entities']['hashtags']
+            tweets['tweet' + str(count)]['sentiment'] = TextBlob(tweet._json['full_text']).sentiment.polarity
             count = count + 1
 
         print tweets
@@ -61,9 +62,9 @@ def searchTweets(trends, latitude, longitude, radius):
             queryAndTweet[query].append(tweets)
         else:
             queryAndTweet[query] = tweets
-    print queryAndTweet
+    # print queryAndTweet
     json_string = json.dumps(queryAndTweet)
     return json.loads(json_string)
 
-if __name__ == "__main__":
-    print nearbyTrends(40.0068, -105.2628)
+# if __name__ == "__main__":
+#     print nearbyTrends(40.0068, -105.2628)
