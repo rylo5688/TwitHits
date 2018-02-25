@@ -14,12 +14,13 @@ api = tweepy.API(auth)
 #area = api.search("Tom Hanks", lang='en', rpp=5, page=1, geocode="35.9078,127.7669,150km", show_user=True)
 
 for tweet in tweepy.Cursor(api.search,
-                           q="Twice",
-                           rpp=100,
+                           q="Twice -filter:retweets",
+                           rpp=10,
                            geocode="35.9078,127.7669,150km",
                            result_type="recent",
                            include_entities=True,
                            lang="en",
                            show_user=True).items():
-    print(tweet.text)
+
+    print(tweet.created_at, tweet.text)
   
