@@ -1,4 +1,4 @@
-var apiKey = "https://maps.googleapis.com/maps/api/js?key=" + GoogleKeys["key"] + "&callback=initMap&libraries=drawing";
+var apiKey = "https://maps.googleapis.com/maps/api/js?key=" + GoogleKeys["key"] + "&callback=initMap&libraries=drawing,geometry";
 function loadScript() {
     var script = document.createElement('script');
     script.type = 'text/javascript';
@@ -19,14 +19,14 @@ function initMap() {
     });
 
     var drawingManager = new google.maps.drawing.DrawingManager({
-        drawingMode: google.maps.drawing.OverlayType.CIRCLE,
+        drawingMode: google.maps.drawing.OverlayType.RECTANGLE,
         drawingControl: true,
         drawingControlOptions: {
             position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: ['circle'],
-            drawingModes: [google.maps.drawing.OverlayType.CIRCLE]
+            drawingModes: ['rectangle'],
+            drawingModes: [google.maps.drawing.OverlayType.RECTANGLE]
         },
-        circleOptions: {
+        rectangleOptions: {
             fillColor: '#ff0000',
             fillOpacity: 0.03,
             strokeWeight: 1,
@@ -40,9 +40,9 @@ function initMap() {
     });
 
     // Allows for only one circle selection at a time
-    google.maps.event.addListener(drawingManager, 'circlecomplete', function( circle ) {
+    google.maps.event.addListener(drawingManager, 'rectanglecomplete', function( rectangle ) {
         clearSelection();
-        selected = circle;
+        selected = rectangle;
     });
 
     // External Click clears out existing selections
@@ -62,12 +62,42 @@ function clearSelection() {
     selected = null;
 }
 
+var search
 // Called when "Generate Map" button is pressed
 // Right now, just fits the Google Map view to selection
 function genMap() {
     if( selected ) {
         console.log("Area is selected");
-        map.fitBounds( selected.getBounds() );
+        var bounds = selected.getBounds();
+        map.fitBounds( bounds );
+
+        LatLng northEast = bounds.getNorthEast();
+        var heightCoords = northEast.lat() - southWest.lat();
+        LatLng southWest = bounds.getSouthWest();
+        var widthCoords = northEast.lng() - southWest.lng();
+
+        LatLng northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
+        LatLng southEast = new google.maps.Latlng( southWest.lat(), northEast.lng());
+
+        var heightKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, southEast) / 1000;
+        var widthKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, northWest) / 1000;
+
+        var tileHeightCoords = heightCoords / 5;
+        var tileHeightKM = heightKM / 5;
+
+        var tileWidthCords = widthCoords / 5;
+        var tileWidthKM = widthKM / 5;
+
+        var radiusKM = Math.min(tileHeightKM, tileWidthKM) / 2;
+
+        var coords = [];
+        coords.push(radiusKM);
+
+        for( i = 1; i < 5; i++ ) {
+            for( j = 1; j < 5; j++ ) {
+            }
+        }
+        //console.log("Radius: " + (Math.min(tileHeight, tileWidth) / 2));
         clearSelection();
     }
 }
