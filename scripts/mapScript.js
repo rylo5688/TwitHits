@@ -82,7 +82,7 @@ function genMap() {
         var widthCoords = northEast.lng() - southWest.lng();
 
         var northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
-        var southEast = new google.maps.Latlng( southWest.lat(), northEast.lng());
+        var southEast = new google.maps.LatLng( southWest.lat(), northEast.lng());
 
         var heightKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, southEast) / 1000;
         var widthKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, northWest) / 1000;
