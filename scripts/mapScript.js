@@ -62,7 +62,6 @@ function clearSelection() {
     selected = null;
 }
 
-var search
 // Called when "Generate Map" button is pressed
 // Right now, just fits the Google Map view to selection
 function genMap() {
@@ -71,13 +70,13 @@ function genMap() {
         var bounds = selected.getBounds();
         map.fitBounds( bounds );
 
-        LatLng northEast = bounds.getNorthEast();
+        var northEast = bounds.getNorthEast();
+        var southWest = bounds.getSouthWest();
         var heightCoords = northEast.lat() - southWest.lat();
-        LatLng southWest = bounds.getSouthWest();
         var widthCoords = northEast.lng() - southWest.lng();
 
-        LatLng northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
-        LatLng southEast = new google.maps.Latlng( southWest.lat(), northEast.lng());
+        var northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
+        var southEast = new google.maps.LatLng( southWest.lat(), northEast.lng());
 
         var heightKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, southEast) / 1000;
         var widthKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, northWest) / 1000;
@@ -91,11 +90,17 @@ function genMap() {
         var radiusKM = Math.min(tileHeightKM, tileWidthKM) / 2;
 
         var coords = [];
-        coords.push(radiusKM);
+        //coords.push(radiusKM);
 
+        var start = {lat: northWest.lat(), lng: northWest.lng()};
         for( i = 1; i < 5; i++ ) {
             for( j = 1; j < 5; j++ ) {
+                var coord = { lat: start.lat + i*tileHeightKM, lng: start.lng + j*tileWidthKM };
+                coords.push( coord )
             }
+        }
+        for( i = 0; i < coords.length; i++) {
+            console.log("Lat: " + coords[i].lat + " Long: " + coords[i].lng);
         }
         //console.log("Radius: " + (Math.min(tileHeight, tileWidth) / 2));
         clearSelection();
