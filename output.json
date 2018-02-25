@@ -1,3 +1,12 @@
-2391279
-TOTAL TWEETS: 50
-['#kywx', '#arwx', 'Nikola Jokic', '#tornado', 'Allen Iverson', '#curling', '#swcolt18', 'Nick Young', 'Swaggy P', 'Melo']
+{}
+{}
+{'tweet1': {'username': u'drews_newsfeed', 'tweet': u'Me every time I remember Nikola Jokic isn\u2019t playing in the #NBAAllStarGame https://t.co/XwJfO96RGH', 'hashtags': [{u'indices': [59, 74], u'text': u'NBAAllStarGame'}]}}
+{}
+{'tweet1': {'username': u'noscopebirdIDer', 'tweet': u'I love Allen Iverson so much. Still remember seeing him live in his prime', 'hashtags': []}}
+{'tweet1': {'username': u'SenorG', 'tweet': u'RT @SraTER: "From deficiency to proficiency" - Juan Carlos Morales.  #swcolt18 @CCFLT #LeadwithLanguages', 'hashtags': [{u'indices': [69, 78], u'text': u'swcolt18'}, {u'indices': [86, 104], u'text': u'LeadwithLanguages'}]}}
+{}
+{'tweet1': {'username': u'Boulder_Tim', 'tweet': u'\U0001f914If a law is passed for teachers to carry guns in the classroom, will they be able to get a waiver by claiming to h\u2026 https://t.co/6AJ4bCtQX6', 'hashtags': []}}
+{'tweet1': {'username': u'Nick_Leitner13', 'tweet': u'@ColliderVideo Is there a movie you saw in theaters when you were younger that, looking back, you now realize you w\u2026 https://t.co/cXrMLG73VU', 'hashtags': []}}
+{}
+{u'Nikola Jokic': {u'tweet1': {u'username': u'drews_newsfeed', u'tweet': u'Me every time I remember Nikola Jokic isn\u2019t playing in the #NBAAllStarGame https://t.co/XwJfO96RGH', u'hashtags': [{u'indices': [59, 74], u'text': u'NBAAllStarGame'}]}}, u'#kywx': {}, u'#swcolt18': {u'tweet1': {u'username': u'SenorG', u'tweet': u'RT @SraTER: "From deficiency to proficiency" - Juan Carlos Morales.  #swcolt18 @CCFLT #LeadwithLanguages', u'hashtags': [{u'indices': [69, 78], u'text': u'swcolt18'}, {u'indices': [86, 104], u'text': u'LeadwithLanguages'}]}}, u'#arwx': {}, u'#DUGAMEDAY': {}, u'Allen Iverson': {u'tweet1': {u'username': u'noscopebirdIDer', u'tweet': u'I love Allen Iverson so much. Still remember seeing him live in his prime', u'hashtags': []}}, u'Swaggy P': {}, u'#tornado': {}, u'Nick Young': {u'tweet1': {u'username': u'Nick_Leitner13', u'tweet': u'@ColliderVideo Is there a movie you saw in theaters when you were younger that, looking back, you now realize you w\u2026 https://t.co/cXrMLG73VU', u'hashtags': []}}, u'Spurs': {u'tweet1': {u'username': u'Boulder_Tim', u'tweet': u'\U0001f914If a law is passed for teachers to carry guns in the classroom, will they be able to get a waiver by claiming to h\u2026 https://t.co/6AJ4bCtQX6', u'hashtags': []}}}
+[u'#kywx', u'#arwx', u'Nikola Jokic', u'#tornado', u'Allen Iverson', u'#swcolt18', u'#DUGAMEDAY', u'Spurs', u'Nick Young', u'Swaggy P']

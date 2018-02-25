@@ -1,5 +1,6 @@
 from access import Access
 import tweepy
+import json
 
 auth = tweepy.OAuthHandler(Access.consumer_key, Access.consumer_secret)
 auth.set_access_token(Access.access_token, Access.access_token_secret)
@@ -14,13 +15,16 @@ def hexParse(tweet):
     return tweet
 
 def nearbyTrends(latitude, longitude):
+    # Getting WOEID from lat, long coords
     geoID = api.trends_closest(latitude, longitude)
-    print geoID[0]['woeid']
+
+    # Gettings trends near the WOEID
     trending_tweets = api.trends_place(geoID[0]['woeid'])
-    print "TOTAL TWEETS: " + str(len(trending_tweets[0]['trends']))
 
     trends = []
     count = 0
+
+    # Extracting trends based on geolocation
     for tweet in trending_tweets[0]['trends']:
         if (count >= 10):
             break
@@ -28,28 +32,36 @@ def nearbyTrends(latitude, longitude):
         trends.append(hexParse(str(tweet['query'])))
         count = count+1
 
-    searchTweet(trends, latitude, longitude, 8)
+    # searchTweets(trends, latitude, longitude, 10)
 
-    return trends
+    json_string = json.dumps(trends)
+    return json.loads(json_string)
 
-def searchTweet(trends, latitude, longitude, radius):
-    # API.search(q[, lang][, locale][, rpp][, page][, since_id][, geocode][, show_user])
-    gCode = str(latitude) + "," + str(longitude) + "," + str(radius) + "km"
+def searchTweets(trends, latitude, longitude, radius):
+    # Geocode with lat,long,radius
+    gCode = str(latitude) + "," + str(longitude) + "," + str(radius) + "mi"
 
     queryAndTweet = {}
     for query in trends:
         results = api.search(q=query, count=1, geocode=gCode)
 
+        tweets = {}
+        count = 1
+        for tweet in results:
+            tweets['tweet' + str(count)] = {}
+            tweets['tweet' + str(count)]['username'] = tweet._json['user']['screen_name']
+            tweets['tweet' + str(count)]['tweet'] = tweet._json['text']
+            tweets['tweet' + str(count)]['hashtags'] = tweet._json['entities']['hashtags']
+            count = count + 1
+
+        print tweets
         if query in queryAndTweet:
-            queryAndTweet[query].append([results])
+            queryAndTweet[query].append(tweets)
         else:
-            queryAndTweet[query] = [results]
+            queryAndTweet[query] = tweets
 
-        # if len(results) > 0:
-            # queryAndTweet.append({query : [] })
+    json_string = json.dumps(queryAndTweet)
+    return json.loads(json_string)
 
-
-
-
-if __name__ == "__main__":
-    print nearbyTrends(40.0068, -105.2628)
+# if __name__ == "__main__":
+#     print nearbyTrends(40.0068, -105.2628)
