@@ -71,13 +71,13 @@ function genMap() {
         var bounds = selected.getBounds();
         map.fitBounds( bounds );
 
-        LatLng northEast = bounds.getNorthEast();
+        var northEast = bounds.getNorthEast();
         var heightCoords = northEast.lat() - southWest.lat();
-        LatLng southWest = bounds.getSouthWest();
+        var southWest = bounds.getSouthWest();
         var widthCoords = northEast.lng() - southWest.lng();
 
-        LatLng northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
-        LatLng southEast = new google.maps.Latlng( southWest.lat(), northEast.lng());
+        var northWest = new google.maps.LatLng( northEast.lat(), southWest.lng());
+        var southEast = new google.maps.Latlng( southWest.lat(), northEast.lng());
 
         var heightKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, southEast) / 1000;
         var widthKM = google.maps.geometry.spherical.computeDistanceBetween(northEast, northWest) / 1000;

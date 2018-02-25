@@ -32,7 +32,7 @@ def nearbyTrends(latitude, longitude):
         trends.append(hexParse(str(tweet['query'])))
         count = count+1
 
-    # searchTweets(trends, latitude, longitude, 10)
+    searchTweets(trends, latitude, longitude, 10)
 
     json_string = json.dumps(trends)
     return json.loads(json_string)
@@ -43,7 +43,7 @@ def searchTweets(trends, latitude, longitude, radius):
 
     queryAndTweet = {}
     for query in trends:
-        results = api.search(q=query, count=1, geocode=gCode)
+        results = api.search(q=query, lang="en", count=1, result_type="recent", geocode=gCode)
 
         tweets = {}
         count = 1
@@ -59,9 +59,9 @@ def searchTweets(trends, latitude, longitude, radius):
             queryAndTweet[query].append(tweets)
         else:
             queryAndTweet[query] = tweets
-
+    print queryAndTweet
     json_string = json.dumps(queryAndTweet)
     return json.loads(json_string)
 
-# if __name__ == "__main__":
-#     print nearbyTrends(40.0068, -105.2628)
+if __name__ == "__main__":
+    print nearbyTrends(40.0068, -105.2628)
