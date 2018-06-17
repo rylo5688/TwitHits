@@ -1,23 +1,15 @@
-# from access import Access
 import tweepy
 import json
 import requests
 from flask import Flask, render_template, request
+from access.access import Access
+
 app = Flask(__name__, template_folder='templates')
 
 # @app.route("/")
 
-access_token = "895504784152641539-wdQSBCOwWIsvM0PkKsuanUOXnm3mUG9"
-access_token_secret = "ugXTqduzil3XbVEJRXuPjhodz67Pd9mOu1RmQ5GlkEp1O"
-consumer_key = "zHgyEexCVqfVBueaOvnlLXVrR"
-consumer_secret = "DtDVzfv01mI4TkxjKj3M6XGS04wGVXi9tuJAxowd68w90D9g6Z"
-ibmUsername = "3fed9a96-c16d-42e9-a828-f00773c6203c"
-ibmPassword = "VFBY3QNTU4Id"
-ibmUrl = "https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2016-05-19"
-
-
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(Access.consumer_key, Access.consumer_secret)
+auth.set_access_token(Access.access_token, Access.access_token_secret)
 
 api = tweepy.API(auth)
 
@@ -35,7 +27,7 @@ def hexParse(tweet):
 def analyzeTone(tweet):
     headers = {"content-type": "text/plain"}
 
-    r = requests.post(Access.ibmUrl, auth=(ibmUsername, ibmPassword),headers = headers,
+    r = requests.post(Access.ibmUrl, auth=(Access.ibmUsername, Access.ibmPassword),headers = headers,
          data=tweet)
     return r.text
 

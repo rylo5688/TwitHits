@@ -1,3 +1,4 @@
 access.js
 access.py
 *.pyc
+.vscode

@@ -42,4 +42,5 @@ def tweets(topic, lat, log):
   
 
 if __name__ == "__main__":
-    print(trend_in_area(36.7783,-119.4179))
+	print(Access.consumer_key)
+    #print(trend_in_area(36.7783,-119.4179))
