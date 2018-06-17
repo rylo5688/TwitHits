@@ -1,5 +1,9 @@
-from access import Access
 import tweepy
+
+import sys
+import os
+sys.path.append(os.getcwd() + "/static/scripts")
+from py.access import Access
 
 auth = tweepy.OAuthHandler(Access.consumer_key, Access.consumer_secret)
 auth.set_access_token(Access.access_token, Access.access_token_secret)

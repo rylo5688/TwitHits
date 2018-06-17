@@ -2,7 +2,11 @@ import tweepy
 import json
 import requests
 from flask import Flask, render_template, request
-from access.access import Access
+
+import sys
+import os
+sys.path.append(os.getcwd() + "/static/scripts")
+from py.access import Access
 
 app = Flask(__name__, template_folder='templates')
 
